@@ -1,0 +1,28 @@
+практика 1
+Пример бесконечного цикла с while:
+
+while (true) {
+    System.out.println("Бесконечный цикл while");
+}
+
+Пример бесконечного цикла с do-while:
+do {
+    System.out.println("Бесконечный цикл do-while");
+} while (true);
+
+
+практика 2
+for (int i = 1; i <= 10; i++) {
+            if (i == 5) {
+                System.out.println("Цикл завершен на i = " + i);
+                break;  // Прерывает выполнение цикла, когда i == 5
+            }
+            System.out.println("i = " + i);
+        }
+
+for (int i = 1; i <= 10; i++) {
+            if (i == 5) {
+                continue;  // Пропускает вывод i = 5 и переходит к следующей итерации
+            }
+            System.out.println("i = " + i);
+        }

@@ -1,0 +1,125 @@
+практика 1
+                      public class DecodeExample {
+                       public static void main(String[] args) {
+                           // Использование метода decode() для различных систем счисления
+                           try {
+                               Integer decimalValue = Integer.decode("123");   // Десятичное число
+                               Integer octalValue = Integer.decode("0123");    // Восьмеричное число
+                               Integer hexValue1 = Integer.decode("0x1A");     // Шестнадцатеричное число (префикс 0x)
+                               Integer hexValue2 = Integer.decode("#1A");      // Шестнадцатеричное число (префикс #)
+
+                               // Вывод значений
+                               System.out.println("Десятичное значение (123): " + decimalValue);
+                               System.out.println("Восьмеричное значение (0123): " + octalValue);
+                               System.out.println("Шестнадцатеричное значение (0x1A): " + hexValue1);
+                               System.out.println("Шестнадцатеричное значение (#1A): " + hexValue2);
+
+                               // Обработка исключений при некорректных строках
+                               Integer invalidValue = Integer.decode("invalid");
+                           } catch (NumberFormatException e) {
+                               System.out.println("Ошибка преобразования: " + e.getMessage());
+                           }
+                   }
+
+ практика 2
+               public class BooleanExample {
+                   public static void main(String[] args) {
+                       // 1. Статический метод valueOf(boolean value)
+                       Boolean bool1 = Boolean.valueOf(true);
+                       Boolean bool2 = Boolean.valueOf(false);
+
+                       // 2. Статический метод valueOf(String s)
+                       Boolean bool3 = Boolean.valueOf("true");  // true
+                       Boolean bool4 = Boolean.valueOf("TRUE");  // true (игнорируется регистр)
+                       Boolean bool5 = Boolean.valueOf("false"); // false
+                       Boolean bool6 = Boolean.valueOf("unknown"); // false (любой не "true")
+
+                       // 3. Конструктор Boolean(String s) (устаревший)
+                       Boolean bool7 = new Boolean("true");      // true
+                       Boolean bool8 = new Boolean("unknown");   // false
+
+                       // Проверка значений
+                       System.out.println("bool1 (valueOf(true)): " + bool1);
+                       System.out.println("bool2 (valueOf(false)): " + bool2);
+                       System.out.println("bool3 (valueOf(\"true\")): " + bool3);
+                       System.out.println("bool4 (valueOf(\"TRUE\")): " + bool4);
+                       System.out.println("bool5 (valueOf(\"false\")): " + bool5);
+                       System.out.println("bool6 (valueOf(\"unknown\")): " + bool6);
+                       System.out.println("bool7 (new Boolean(\"true\")): " + bool7);
+                       System.out.println("bool8 (new Boolean(\"unknown\")): " + bool8);
+
+                       // Сравнение объектов Boolean
+                       System.out.println("bool1 == bool3: " + (bool1 == bool3)); // true (кэшированные объекты)
+                       System.out.println("bool7 == bool3: " + (bool7 == bool3)); // false (новый объект)
+                   }
+               }
+
+ практика 3
+               public class AutoBoxingExample {
+                   public static void main(String[] args) {
+                       // Пример: Автораспаковка null
+                       Integer nullValue = null; // Обертка Integer с null значением
+
+                       try {
+                           // Попытка распаковать null в примитивный тип int
+                           int intValue = nullValue; // Здесь будет выброшено NullPointerException
+                       } catch (NullPointerException e) {
+                           System.out.println("Ошибка: Попытка распаковать null в примитивный тип.");
+                           System.out.println("Сообщение исключения: " + e.getMessage());
+                       }
+
+                       // Пример, когда автоупаковка работает корректно
+                       int primitiveValue = 10;
+                       Integer boxedValue = primitiveValue; // Автоупаковка
+
+                       // Корректная распаковка
+                       int unpackedValue = boxedValue; // Автораспаковка
+                       System.out.println("Упакованное значение: " + boxedValue);
+                       System.out.println("Распакованное значение: " + unpackedValue);
+                   }
+               }
+
+  практика 4
+               вывод следующий:
+               a1==i1 true
+               b1==i1 true
+               a1==b1 false
+               a1.equals(i1) -> true
+               b1.equals(i1) -> true
+               a1.equals(b1) -> true
+               a2==i2 true
+               b2==i2 true
+               a2==b2 true
+               a2.equals(i2) -> true
+               b2.equals(i2) -> true
+               a2.equals(b2) -> true
+
+               пояснение:
+               Блок с i1 = 128:
+               a1 == i1 и b1 == i1:
+
+               При сравнении a1 и b1 с i1 выполняется автораспаковка a1 и b1 из Integer в int.
+               После распаковки a1 и b1 сравниваются как примитивные типы int. Поскольку i1 = 128 и a1/b1 также равны 128, результат — true.
+               a1 == b1:
+
+               Здесь сравниваются ссылки на объекты Integer. Для значений вне диапазона от -128 до 127 (кэшируемых в IntegerCache) Java создаёт новые объекты Integer, поэтому a1 и b1 указывают на разные объекты.
+               Результат — false.
+               a1.equals(i1) и b1.equals(i1):
+
+               Метод equals сравнивает значения, а не ссылки. Значения a1 и i1 равны (оба равны 128), поэтому результат — true.
+               a1.equals(b1):
+
+               Аналогично, метод equals сравнивает значения объектов, а не ссылки. Поскольку a1 и b1 равны 128, результат — true.
+               Блок с i2 = 127:
+               a2 == i2 и b2 == i2:
+
+               Аналогично первому блоку, выполняется автораспаковка, и значения сравниваются как int. Результат — true.
+               a2 == b2:
+
+               Для значений в диапазоне от -128 до 127 используется кэширование объектов IntegerCache. В этом случае a2 и b2 ссылаются на один и тот же объект, поскольку 127 находится в кэшируемом диапазоне.
+               Результат — true.
+               a2.equals(i2), b2.equals(i2), a2.equals(b2):
+
+               Во всех случаях метод equals сравнивает значения, а не ссылки. Значения равны, поэтому результат — true.
+
+               Класс IntegerCache — это внутренний класс, используемый в java.lang.Integer для кэширования объектов Integer в диапазоне от -128 до 127.

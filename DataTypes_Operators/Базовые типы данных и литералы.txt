@@ -1,0 +1,128 @@
+практика 1
+public class DataTypes {
+    public static void main(String[] args) {
+        // Целочисленные типы
+        byte byteVar = 0;  // 8 бит
+        short shortVar = 0;  // 16 бит
+        int intVar = 0;  // 32 бита
+        long longVar = 0L;  // 64 бита
+
+        // С плавающей точкой
+        float floatVar = 0.0f;  // 32 бита
+        double doubleVar = 0.0;  // 64 бита
+
+        // Символьный тип
+        char charVar = '\u0000';  // 16 бит (нулевой символ, unicode)
+
+        // Булевский тип
+        boolean boolVar = false;  // false
+
+        // Вывод значений
+        System.out.println("byteVar = " + byteVar);
+        System.out.println("shortVar = " + shortVar);
+        System.out.println("intVar = " + intVar);
+        System.out.println("longVar = " + longVar);
+        System.out.println("floatVar = " + floatVar);
+        System.out.println("doubleVar = " + doubleVar);
+        System.out.println("charVar = " + charVar);
+        System.out.println("boolVar = " + boolVar);
+    }
+}
+
+
+практика 2
+public class MyName {
+    public static void main(String[] args) {
+        // Печать имени через Unicode
+        System.out.println("\u041C\u0430\u0440\u0438\u044F");  // Мария
+    }
+}
+
+практика 3
+public class Scope {
+    public static void main(String[] args) {
+        int a = 1;
+        {
+            int b = 2;
+        }
+        // Ошибка компиляции: переменная 'b' не существует за пределами блока
+        int c = a + b;  // Ошибка
+    }
+}
+Объяснение: Переменная b существует только в блоке { }, и за его пределами она недоступна.
+Поэтому попытка использования переменной b после выхода из этого блока приведет к ошибке компиляции.
+
+практика 4
+public class OverloadOperator {
+    public static void main(String[] args) {
+        int a = 5;
+        double b = 3.5;
+
+        String result = "Число a = " + a + ", Число b = " + b;
+        System.out.println(result);  // "Число a = 5, Число b = 3.5"
+
+        String combined = "5" + 3;  // строка + число
+        System.out.println(combined);  // "53"
+    }
+}
+
+
+практика 5
+public class Arithmetic_operations {
+    public static void main(String[] args) {
+        byte byteVar = 10;
+        short shortVar = 20;
+        int intVar = 30;
+        long longVar = 40L;
+        float floatVar = 50.0f;
+        double doubleVar = 60.0;
+
+        // Пример 1: Сложение переменных разных типов
+        double result1 = byteVar + floatVar;  // byte + float -> float, затем float -> double
+        System.out.println(result1);  // 60.0
+
+        // Пример 2: Деление переменных разных типов
+        double result2 = intVar / doubleVar;  // int / double -> double
+        System.out.println(result2);  // 0.5
+    }
+}
+Объяснение: Когда выполняются операции с переменными разных типов, Java
+ выполняет автоматическое расширяющее преобразование типов: меньший тип преобразуется в больший
+
+практика 6
+public class TypeConversion {
+    public static void main(String[] args) {
+        int i = 100;
+        byte b = (byte) i;  // явное преобразование
+        System.out.println(b);  // 100
+    }
+}
+Объяснение: При преобразовании из int в byte данные усечены до диапазона
+ byte (от -128 до 127). Если бы значение переменной i было больше 127 или меньше -128, то произошла бы потеря данных.
+
+практика 7
+public class Byte {
+    public static void main(String[] args) {
+        int a = 120;
+        byte b = (byte)(a + 10);  // явное преобразование в byte
+        byte c = (byte)(a + 10);  // правильное преобразование
+        byte d = (byte)(a + 1);   // правильное преобразование
+
+        System.out.println("b = " + b);  // 130, но при сужении: -126
+        System.out.println("c = " + c);  // 130, но при сужении: -126
+        System.out.println("d = " + d);  // 121
+    }
+}
+Объяснение: При выполнении операции a + 10 результат вычисляется как int (значение 130),
+но для того, чтобы сохранить это в byte, нужно выполнить явное преобразование.
+При этом значение 130 обрезается и становится -126 из-за переполнения диапазона byte (от -128 до 127).
+
+
+практика 8
+public class Interface {
+    public static void main(String[] args) {
+        var name = "Мария";  // Тип переменной будет автоматически определен как String
+        var age = 25;  // Тип будет int
+        System.out.println(name + " возраст: " + age);
+    }
+}
