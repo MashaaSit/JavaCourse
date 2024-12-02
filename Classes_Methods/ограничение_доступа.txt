@@ -1,0 +1,48 @@
+// Класс с разными спецификаторами доступа
+public class AccessModifiersDemo {
+
+    public int publicVar = 1; // Доступен везде
+    protected int protectedVar = 2; // Доступен в пределах пакета и в подклассах
+    int packageVar = 3; // Пакетный доступ (по умолчанию), доступен внутри пакета
+    private int privateVar = 4; // Доступен только внутри этого класса
+
+    // Метод с разными спецификаторами
+    public void publicMethod() {
+        System.out.println("publicMethod() вызывается");
+    }
+
+    protected void protectedMethod() {
+        System.out.println("protectedMethod() вызывается");
+    }
+
+    void packageMethod() {
+        System.out.println("packageMethod() вызывается");
+    }
+
+    private void privateMethod() {
+        System.out.println("privateMethod() вызывается");
+    }
+}
+
+// Класс для демонстрации доступа из другого пакета
+class AccessModifiersTest {
+    public static void main(String[] args) {
+        AccessModifiersDemo obj = new AccessModifiersDemo();
+
+        // Доступ к public членам
+        System.out.println("publicVar: " + obj.publicVar);
+        obj.publicMethod();
+
+        // Доступ к protected членам (доступен внутри того же пакета или в подклассах)
+        System.out.println("protectedVar: " + obj.protectedVar);
+        obj.protectedMethod();
+
+        // Доступ к packageVar - доступно только в том же пакете
+        System.out.println("packageVar: " + obj.packageVar);
+        obj.packageMethod();
+
+        // Доступ к privateVar и privateMethod невозможен (ошибка компиляции)
+        // System.out.println("privateVar: " + obj.privateVar); // Ошибка компиляции
+        // obj.privateMethod(); // Ошибка компиляции
+    }
+}

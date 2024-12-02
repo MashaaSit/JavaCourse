@@ -1,0 +1,27 @@
+public class A {
+    public static int a = 1;
+    public static int b;
+
+    public static void printVars() {
+        System.out.println(a);
+        System.out.println(b);
+    }
+}
+
+//Вызов через класс A:
+//public class Main {
+//    public static void main(String[] args) {
+//        // Вызов метода через имя класса
+//        A.printVars();
+//    }
+//}
+//
+////Вызов через объект класса A:
+//public class Main {
+//    public static void main(String[] args) {
+//        // Создание объекта класса A
+//        A obj = new A();
+//        // Вызов статического метода через объект
+//        obj.printVars();
+//    }
+//}
